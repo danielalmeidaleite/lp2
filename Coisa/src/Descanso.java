@@ -1,12 +1,12 @@
 public class Descanso {
     private int horasDescanso;
-    private int numsSemana;
+    private int numsSemana = 1;
 
     public void defineHorasDescanso (int valor) {
         horasDescanso = valor;
     }
 
-    public void defineNumsSemana (int valor) {
+    public void defineNumeroSemanas (int valor) {
         numsSemana = valor;
     }
 
