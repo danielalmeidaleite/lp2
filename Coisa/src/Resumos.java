@@ -14,12 +14,4 @@ public class Resumos {
     public String getConteudo() {
         return conteudo;
     }
-
-    public void setTema(String tema) {
-        this.tema = tema;
-    }
-
-    public void setConteudo(String conteudo) {
-        this.conteudo = conteudo;
-    }
 }
