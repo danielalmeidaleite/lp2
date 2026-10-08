@@ -1,10 +1,12 @@
+import java.util.Arrays;
+
 public class RegistroResumos {
     private int MAX_RESUMOS;
     private Resumos[] resumos;
     private int resumoDaVez = 0;
     private int resumosCadastrados;
 
-    RegistroResumos(int numeroDeResumos) {
+    public RegistroResumos(int numeroDeResumos) {
         MAX_RESUMOS = numeroDeResumos;
         resumos = new Resumos[MAX_RESUMOS];
     }
@@ -55,14 +57,23 @@ public class RegistroResumos {
     public int conta() {
         return resumosCadastrados;
     }
+
+    public String[] busca(String chaveDeBusca) {
+        int nCorrespondentes = 0;
+        for (int i = 0; i < resumosCadastrados; i++) {
+            if (resumos[i].getConteudo().toLowerCase().contains(chaveDeBusca.toLowerCase())) {
+                nCorrespondentes++;
+            }
+        }
+
+        String[] temasCorrespondentes = new String[nCorrespondentes];
+        for (int i = 0; i < nCorrespondentes; i++) {
+        if (resumos[i].getConteudo().toLowerCase().contains(chaveDeBusca.toLowerCase())) {
+            temasCorrespondentes[i] = resumos[i].getTema();
+            }
+        }
+        Arrays.sort(temasCorrespondentes);
+
+        return temasCorrespondentes;
+    }
 }
-
-
-
-
-
-
-
-
-
-
