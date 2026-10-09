@@ -1,11 +1,11 @@
 import java.util.Arrays;
 
 public class Disciplina {
-    private String nomeDisciplina;
+    private final String nomeDisciplina;
     private int horasDeEstudo;
-    private int nDeNotas;
+    private final int nDeNotas;
     private double[] notas;
-    private int[] pesos;
+    private final int[] pesos;
 
     public Disciplina(String nomeDisciplina) {
         this(nomeDisciplina, 4);
@@ -38,8 +38,8 @@ public class Disciplina {
 
     private double calculaMedia() {
         int somaDosPesos = 0;
-        for (int i = 0; i < pesos.length; i++) {
-            somaDosPesos += pesos[i];
+        for (int peso : pesos) {
+            somaDosPesos += peso;
         }
         double soma = 0;
         for (int i = 0; i < notas.length; i++) {
@@ -50,9 +50,7 @@ public class Disciplina {
 
     public boolean aprovado(){
         double media = calculaMedia();
-        if (media >= 7.0) {
-            return true;
-        }
+        if (media >= 7.0) {return true;}
         return false;
     }
 
