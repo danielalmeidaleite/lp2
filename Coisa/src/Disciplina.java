@@ -3,17 +3,16 @@ import java.util.Arrays;
 public class Disciplina {
     private String nomeDisciplina;
     private int horasDeEstudo;
-    private static int nDeNotas = 4;
-    private double[] notas = new double[nDeNotas];
-    private static int[] pesos = {1, 1, 1, 1};
-    private int somaDosPesos;
+    private int nDeNotas;
+    private double[] notas;
+    private int[] pesos;
 
     public Disciplina(String nomeDisciplina) {
-        this(nomeDisciplina, nDeNotas, pesos);
+        this(nomeDisciplina, 4);
     }
 
     public Disciplina(String nomeDisciplina, int nDeNotas) {
-        this(nomeDisciplina, nDeNotas, pesos);
+        this(nomeDisciplina, nDeNotas, pesosIguais(nDeNotas));
     }
 
     public Disciplina(String nomeDisciplina, int nDeNotas, int[] pesos) {
@@ -21,11 +20,13 @@ public class Disciplina {
         this.nDeNotas = nDeNotas;
         this.notas = new double[nDeNotas];
         this.pesos = pesos;
-        for (int i = 0; i < pesos.length; i++) {
-            this.somaDosPesos += pesos[i];
-        }
     }
 
+    private static int[] pesosIguais(int nDeNotas) {
+        int[] pesos = new int[nDeNotas];
+        Arrays.fill(pesos, 1);
+        return pesos;
+    }
 
     public void cadastraHoras(int horas) {
         horasDeEstudo += horas;
@@ -36,12 +37,15 @@ public class Disciplina {
     }
 
     private double calculaMedia() {
+        int somaDosPesos = 0;
+        for (int i = 0; i < pesos.length; i++) {
+            somaDosPesos += pesos[i];
+        }
         double soma = 0;
         for (int i = 0; i < notas.length; i++) {
             soma += notas[i] * pesos[i];
         }
-        double media = soma / somaDosPesos;
-        return media;
+        return soma / somaDosPesos;
     }
 
     public boolean aprovado(){
