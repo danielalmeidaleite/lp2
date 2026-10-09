@@ -50,8 +50,7 @@ public class Disciplina {
 
     public boolean aprovado(){
         double media = calculaMedia();
-        if (media >= 7.0) {return true;}
-        return false;
+        return media >= 7.0;
     }
 
     @Override
