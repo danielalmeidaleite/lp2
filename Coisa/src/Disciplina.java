@@ -3,11 +3,30 @@ import java.util.Arrays;
 public class Disciplina {
     private String nomeDisciplina;
     private int horasDeEstudo;
-    private double[] notas = {0, 0, 0, 0};
+    private static int nDeNotas = 4;
+    private double[] notas = new double[nDeNotas];
+    private static int[] pesos = {1, 1, 1, 1};
+    private int somaDosPesos;
 
     public Disciplina(String nomeDisciplina) {
-        this.nomeDisciplina = nomeDisciplina;
+        this(nomeDisciplina, nDeNotas, pesos);
     }
+
+    public Disciplina(String nomeDisciplina, int nDeNotas) {
+        this(nomeDisciplina, nDeNotas, pesos);
+    }
+
+    public Disciplina(String nomeDisciplina, int nDeNotas, int[] pesos) {
+        this.nomeDisciplina = nomeDisciplina;
+        this.nDeNotas = nDeNotas;
+        this.notas = new double[nDeNotas];
+        this.pesos = pesos;
+        for (int i = 0; i < pesos.length; i++) {
+            this.somaDosPesos += pesos[i];
+        }
+    }
+
+
     public void cadastraHoras(int horas) {
         horasDeEstudo += horas;
     }
@@ -19,9 +38,9 @@ public class Disciplina {
     private double calculaMedia() {
         double soma = 0;
         for (int i = 0; i < notas.length; i++) {
-            soma += notas[i];
+            soma += notas[i] * pesos[i];
         }
-        double media = soma / 4;
+        double media = soma / somaDosPesos;
         return media;
     }
 
@@ -35,7 +54,6 @@ public class Disciplina {
 
     @Override
     public String toString() {
-        // PROGRAMACAO 2 4 7.0 [5.0, 6.0, 7.0, 10.0]
-        return nomeDisciplina + " " + horasDeEstudo + " " + Arrays.toString(notas);
+        return String.format("%s %d %.1f %s", nomeDisciplina, horasDeEstudo, calculaMedia(), Arrays.toString(notas));
     }
 }
